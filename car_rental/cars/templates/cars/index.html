@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+    <div class="pure-g-r content-ribbon">
+        <div class="pure-u-1">
+            <div class="l-box">
+                <h4 class="content-subhead">Listagem de Carros</h4>
+                <p>Abaixo a lista de carros disponíveis para reservar</p>
+            </div>
+            <div class="pure-controls">
+                <button 
+                    type="submit" 
+                    class="pure-button pure-button-primary"
+                >
+                    Cadastrar
+                </button>
+            </div>
+        </div>
+    </div>
+    {% for car in cars %}
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-1-3">
+                <div class="l-box">
+                    <a href="#">
+                        {% if car.image %}
+                            <img 
+                                src="{{ car.image.url }}" 
+                                alt="{{ car.model }}" 
+                            />
+                        {% else %}
+                            <img src="https://placehold.it/400x250"
+                            alt="{{ car.model }}"
+                            width="400"
+                            height="250" />
+                        {% endif %}
+                    </a>
+                </div>
+            </div> 
+            <div class="pure-u-2-3">
+                <div class="l-box">
+                    <h4 class="content-subhead">
+                        <a href="#" title="">{{ car.model }}</a>
+                    </h4>
+                    <br />
+                    <p>
+                        Ano do Veículo: {{ car.year }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <div class="pure-g-r content-ribbon">
+            <div class="pure-u-1">
+                <div class="l-box">
+                    <p>Nenhum carro está disponível no momento</p>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock content %}

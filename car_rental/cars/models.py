@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.urls import reverse
 from django.utils import timezone
 
 def validate_year(value):
@@ -17,7 +18,6 @@ class YearField(models.IntegerField):
 class Car(models.Model):
     	
     STATUS_CHOICES = (
-        (0, 'Alugado'),
         (1, 'Disponível'),
         (2, 'Manutenção'),
     )
@@ -38,10 +38,9 @@ class Car(models.Model):
 
     def __str__(self):
         return self.model
-
-    def rented(self):
-        self.status = 0
-        self.save()
+    
+    def get_absolute_url(self):
+        return reverse('cars:details', kwargs={"pk": self.pk})
 
     class Meta:
         verbose_name = 'Carro'

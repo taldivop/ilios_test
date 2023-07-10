@@ -159,7 +159,6 @@ form.pure-form-aligned ul.errorlist li {
     padding: 0.5em 2em;
     border-radius: 5px;
 }
-
 .inner {
     padding: 0em 1em;
 }
@@ -370,4 +369,28 @@ aside a, aside a:visited {
 }
 .hidden {
   display: none;
+}
+
+/* Feito manualmente */
+
+.flex {
+    display: flex;
+    align-items: flex-end;
+    gap: 5px;
+}
+
+.flex-wrap{
+    flex-wrap: wrap;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.w-100 {
+    width: 100%;
+}
+
+.centerlize {
+    margin: 0 auto;
 }

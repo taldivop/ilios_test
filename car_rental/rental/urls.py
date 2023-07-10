@@ -4,5 +4,5 @@ from car_rental.rental.views import *
 app_name='rental'
 
 urlpatterns = [
-    # path('', rental, name='rental'),
+    path('', index, name='index'),
 ]

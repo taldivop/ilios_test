@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import *
+from car_rental.rental.models import Rental
 
 
 class RentalAdmin(admin.ModelAdmin):

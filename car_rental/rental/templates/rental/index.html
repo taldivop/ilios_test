@@ -1,5 +1,53 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-<h1>OI</h1>
+    <div class="pure-g-r content-ribbon">
+        <div class="pure-u-1">
+            <div class="l-box">
+                <h4 class="content-subhead">Listagem de Reservas</h4>
+                <p>Abaixo o nosso catalogo de veículos disponiveis para reservar.</p>
+                <h4 class="content-subhead">Selecione a data desejada:</h4>
+                <form action="#">
+                    <div style="justify-content: space-between;
+                    align-items: center">
+                        <label for="pickupdate">Data de retirada:</label>
+                        <input type="datetime-local" id="pickupdate" name="birthday">
+                    </div>
+                    <div>
+                        <label for="pickupdate">Data de devolução:</label>
+                        <input type="datetime-local" id="pickupdate" name="birthday">
+                    </div>
+                    <input type="submit" label"Filtrar">
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="rental-table">
+        <table class="pure-table pure-table-horizontal w-100">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Veículo</th>
+                    <th>Data de retirada</th>
+                    <th>Data de devolução</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for rental in rentals %}
+                    <tr>
+                        <td>{{ rental }}</td>
+                        <td>{{ rental.car }}</td>
+                        <td>{{ rental.pick_up_date }}</td>
+                        <td>{{ rental.drop_off_date }}</td>
+                        <td>ícones</td>
+                    </tr>
+                {% empty %}
+                    <tr>
+                        <td colspan="3">Nenhuma reserva registrada no momento</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}

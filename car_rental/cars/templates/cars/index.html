@@ -6,7 +6,7 @@
             <div class="l-box">
                 <h4 class="content-subhead">Listagem de Carros</h4>
                 <p>Abaixo o nosso catalogo de veículos disponiveis para reservar.</p>
-                <h4 class="content-subhead">Selecione a data desejada:</h4>
+                {% comment %} <h4 class="content-subhead">Selecione a data desejada:</h4>
                 <form action="#">
                     <div style="justify-content: space-between;
                     align-items: center">
@@ -17,7 +17,7 @@
                         <label for="pickupdate">Data de devolução:</label>
                         <input type="datetime-local" id="pickupdate" name="birthday">
                     </div>
-                    <input type="submit" label"Filtrar">
+                    <input type="submit" label"Filtrar"> {% endcomment %}
                 </form>
             </div>
         </div>
@@ -27,9 +27,9 @@
             <div>
                 <div class="w-100">
                     <div class="l-box">
-                        {% if car.image %}
+                        {% if car.photo %}
                             <img 
-                                src="{{ car.image.url }}" 
+                                src="{{ car.photo.url }}" 
                                 alt="{{ car.model }}" 
                                 width="400"
                                 height="250"
@@ -53,6 +53,7 @@
                                 <span>Ano do Veículo: {{ car.year }}</span>
                                 <button type="button"
                                         class="btn btn-primary"
+                                        data-car-id="{{ car.pk }}"
                                         data-bs-toggle="modal"
                                         data-bs-target="#staticBackdrop"
                                 >
@@ -73,51 +74,15 @@
             </div>
         {% endfor %}
     </div>
-
-    {% comment %} FORMULÁRIO PARA RESERVAR CARROS {% endcomment %}
-    <div class="modal fade"
-         id="staticBackdrop"
-         data-bs-backdrop="static"
-         data-bs-keyboard="false"
-         tabindex="-1"
-         aria-labelledby="staticBackdropLabel"
-         aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="staticBackdropLabel">Reserva</h1>
-                    <button type="button"
-                            class="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"></button>
-                </div>
-
-                <div class="modal-body">
-                    {% if is_valid %}
-                        <p>Você enviou o formulário com sucesso!</p>
-                    {% endif %}
-                    <form action="#" class="pure-form pure-form-aligned" method="post">
-                        {% csrf_token %}
-                        <fieldset>
-                            {% for field in form %}
-                                <div class="pure-control-group">
-                                    {{ field.label_tag }} 
-                                    {{ field }}
-                                    {% if field.errors %}
-                                        <div class="invalid-feedback">
-                                            {% for error in field.errors %}
-                                                    {{ error }}
-                                            {% endfor %}
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
-                            <button type="submit" class="btn btn-primary">Reservar</button>
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+    {% include 'rental/rental_modal.html' %}
+    {% block scripts %}
+    {% comment %} <script>
+        $(document).ready(function() {
+            $('.rental-button').click(function() {
+                $('#rentalForm')
+                console.log('to aqui dentro!')
+            });
+        });
+    </script> {% endcomment %}
+    {% endblock scripts %}
 {% endblock content %}

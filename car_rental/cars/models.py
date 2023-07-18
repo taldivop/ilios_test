@@ -1,6 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
-from django.urls import reverse
+# from django.urls import reverse
 from django.utils import timezone
 
 def validate_year(value):
@@ -30,6 +30,12 @@ class Car(models.Model):
         'Situação',
         choices=STATUS_CHOICES, 
         default=1,
+        blank=True
+    )
+    photo = models.ImageField(
+        upload_to='cars/images/',
+        verbose_name='Imagem',
+        null=True,
         blank=True
     )
 

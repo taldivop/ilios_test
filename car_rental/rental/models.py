@@ -49,9 +49,20 @@ class Rental(models.Model):
         ordering = ['car','-pick_up_date','drop_off_date']
     
     def clean(self):
-        self.validate_car_availability()
-        self.validate_date()
-        self.validate_date_overlap()
+        if not self._state.adding:
+            original_instance = Rental.objects.get(pk=self.pk)
+
+            for field in self._meta.fields:
+                field_name = field.name
+                current_value = getattr(self, field_name)
+                original_value = getattr(original_instance, field_name)
+                if field_name != 'status' and current_value != original_value:
+                    field_verbose_name = field.verbose_name
+                    raise ValidationError(f"O campo '{field_verbose_name}' não pode ser alterado.")
+        else:
+            self.validate_car_availability()
+            self.validate_date()
+            self.validate_date_overlap()
 
     def validate_date(self):
         current_datetime = timezone.now()

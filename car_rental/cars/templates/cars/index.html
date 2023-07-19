@@ -17,7 +17,8 @@
                         <label for="pickupdate">Data de devolução:</label>
                         <input type="datetime-local" id="pickupdate" name="birthday">
                     </div>
-                    <input type="submit" label"Filtrar"> {% endcomment %}
+                    <input type="submit" label"Filtrar">
+                    <input type="reset" label"Limpar"> {% endcomment %}
                 </form>
             </div>
         </div>
@@ -50,12 +51,15 @@
                             <div class="flex"
                                  style="justify-content: space-between;
                                         align-items: center">
-                                <span>Ano do Veículo: {{ car.year }}</span>
+                                <span>
+                                    Ano do Veículo: {{ car.year }} <br/>
+                                    Situação: {{ car.get_status_display }}
+                                </span>
                                 <button type="button"
                                         class="btn btn-primary"
                                         data-car-id="{{ car.pk }}"
                                         data-bs-toggle="modal"
-                                        data-bs-target="#staticBackdrop"
+                                        data-bs-target="#carRental"
                                 >
                                     Reservar
                                 </button>
@@ -76,13 +80,5 @@
     </div>
     {% include 'rental/rental_modal.html' %}
     {% block scripts %}
-    {% comment %} <script>
-        $(document).ready(function() {
-            $('.rental-button').click(function() {
-                $('#rentalForm')
-                console.log('to aqui dentro!')
-            });
-        });
-    </script> {% endcomment %}
     {% endblock scripts %}
 {% endblock content %}

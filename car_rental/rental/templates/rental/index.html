@@ -27,6 +27,7 @@
             <thead>
                 <tr>
                     <th>#</th>
+                    <th>Status</th>
                     <th>Veículo</th>
                     <th>Data de retirada</th>
                     <th>Data de devolução</th>
@@ -37,6 +38,7 @@
                 {% for rental in rentals %}
                     <tr>
                         <td>{{ rental }}</td>
+                        <td>{{ rental.get_status_display }}</td>
                         <td>{{ rental.car }}</td>
                         <td>{{ rental.pick_up_date }}</td>
                         <td>{{ rental.drop_off_date }}</td>

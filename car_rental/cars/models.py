@@ -23,7 +23,7 @@ class Car(models.Model):
     )
 
     model = models.CharField('Modelo', max_length=100)
-    plate = models.CharField('Placa', max_length=7)
+    plate = models.CharField('Placa', unique=True, max_length=7)
     year = YearField()
     slug = models.SlugField('Atalho')
     status = models.IntegerField(
@@ -45,9 +45,6 @@ class Car(models.Model):
     def __str__(self):
         return self.model
     
-    # def get_absolute_url(self):
-    #     return reverse('cars:details', kwargs={"pk": self.pk})
-
     class Meta:
         verbose_name = 'Carro'
         verbose_name_plural = 'Carros'

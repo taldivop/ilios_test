@@ -12,6 +12,7 @@ class CarRentalForm(forms.ModelForm):
     class Meta:
         model = Rental
         fields = '__all__'
+        exclude = ['status']
         widgets = {
             'pick_up_date': DateTimeInput(),
             'drop_off_date': DateTimeInput(),

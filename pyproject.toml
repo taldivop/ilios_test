@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "ilios-test"
+version = "0.1.0"
+description = ""
+authors = ["Pedro Taldivo <pedro.taldivo@iliossistemas.com>"]
+readme = "README.md"
+packages = [{include = "ilios_test"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+django = "^4.2.3"
+dj-database-url = "^2.0.0"
+psycopg2-binary = "^2.9.6"
+whitenoise = {extras = ["brotli"], version = "^6.5.0"}
+gunicorn = "^21.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
